@@ -1,6 +1,6 @@
 <h1>Edit Profile</h1>
 
-<%= form_for @user, url: profile_path do |f| %>
+<%= form_for @user, url: profile_path, method: :patch do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -13,21 +13,19 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %>
     <%= f.text_field :email %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-    <small>Leave blank to keep current password</small>
+    <%= f.label :timezone, "Timezone" %>
+    <%= f.select :timezone, ActiveSupport::TimeZone.all.collect { |zone| [zone.name, zone.name] }, include_blank: true %>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-  </div>
-
 
   <div class="actions">
     <%= f.submit 'Update Profile' %>
