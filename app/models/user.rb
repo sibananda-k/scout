@@ -4,5 +4,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable
 
-  belongs_to :organisation
+  belongs_to :organisation, optional: true
 end
