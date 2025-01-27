@@ -1,7 +1,62 @@
-<% if user_signed_in? %>
-<h1>Welcome Home, <%= current_user.email %></h1>
-<%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
-<% else %>
-<h1>Home</h1>
-<%= link_to 'Sign in', new_user_session_path %>
-<% end %>
+<body class="bg-gradient-primary">
+  <div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+      <div class="col-xl-10 col-lg-12 col-md-9">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+              <div class="col-lg-6">
+                <div class="p-5">
+
+                  <% if user_signed_in? %>
+                    <h1>Welcome Home, <%= current_user.email %></h1>
+                    <%= link_to 'Edit Profile', profile_path, class: 'btn btn-primary' %>
+                    <%= link_to 'Change Password', change_user_password_path %>
+                    <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+                  <% else %>
+                    <div class="text-center">
+                      <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                    </div>
+
+                    <!-- Login Form -->
+                    <%= form_with url: user_session_path, method: :post, class: "user" do |f| %>
+                      <div class="form-group">
+                        <%= f.email_field :email, class: "form-control form-control-user", id: "exampleInputEmail", placeholder: "Enter Email Address...", aria: { describedby: "emailHelp" } %>
+                      </div>
+                      <div class="form-group">
+                        <%= f.password_field :password, class: "form-control form-control-user", id: "exampleInputPassword", placeholder: "Password" %>
+                      </div>
+                      <div class="form-group">
+                        <div class="custom-control custom-checkbox small">
+                          <%= f.check_box :remember_me, class: "custom-control-input", id: "customCheck" %>
+                          <label class="custom-control-label" for="customCheck">Remember Me</label>
+                        </div>
+                      </div>
+                      <%= f.submit "Login", class: "btn btn-primary btn-user btn-block" %>
+                    <% end %>
+
+                    <hr>
+
+                    <div class="text-center">
+                      <%= link_to "Forgot Password?", new_user_password_path, class: "small" %>
+                    </div>
+                    <div class="text-center">
+                      <%= link_to "Create an Account!", new_user_registration_path, class: "small" %>
+                    </div>
+                  <% end %>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
