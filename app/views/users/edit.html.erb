@@ -24,7 +24,7 @@
 
   <div class="field">
     <%= f.label :timezone, "Timezone" %>
-    <%= f.select :timezone, ActiveSupport::TimeZone.all.collect { |zone| [zone.name, zone.name] }, include_blank: true %>
+  <%= f.select :timezone, ActiveSupport::TimeZone.all.collect { |zone| ["UTC #{zone.formatted_offset} #{zone.name}", "UTC #{zone.formatted_offset} #{zone.name}"] }, include_blank: true %>
   </div>
 
   <div class="actions">

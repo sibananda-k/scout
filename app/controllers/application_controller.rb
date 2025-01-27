@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::Base
-  # Override the after_sign_in_path_for method to redirect users to their profile page
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   def after_sign_in_path_for(resource)
-    profile_path  # This will redirect to the profile page after login
+    root_path  # This will redirect to the profile page after login
+  end
+  protected
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :timezone])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :timezone])
   end
 end
