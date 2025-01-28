@@ -5,4 +5,6 @@ class User < ApplicationRecord
           :recoverable, :rememberable, :validatable
 
   belongs_to :organisation, optional: true
+  validates :name, presence: true
+  validates :timezone, presence: true
 end
