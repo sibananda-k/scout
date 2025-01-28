@@ -1,0 +1,11 @@
+<h1>Profile</h1>
+
+<ul class="tabs">
+  <li><%= link_to 'Profile', edit_user_path %></li>
+  <li><%= link_to 'Security', edit_user_password_path %></li>
+</ul>
+
+<div class="tab-content">
+  <%= render 'edit' if params[:tab] == 'profile' || params[:tab].nil? %>
+  <%= render 'edit_password' if params[:tab] == 'security' %>
+</div>
