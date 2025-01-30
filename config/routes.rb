@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/accept_invitation/:invitation_token', to: 'users#accept_invitation', as: :accept_invitation
 
   resources :users, only: [:index, :show, :update, :destroy]
-
+  post 'change_organisation', to: 'pages#change_organisation', as: 'change_organisation'
   root 'pages#index'
   get 'pages/index'
   get 'profile', to: 'users#edit', as: 'profile'

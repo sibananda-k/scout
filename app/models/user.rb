@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :organisations, through: :user_roles
   has_many :roles, through: :user_roles
   belongs_to :invited_by, class_name: "User", optional: true
+  before_save :validate_organisation
 
   validates :name, presence: true
   validates :timezone, presence: true
@@ -21,31 +22,36 @@ class User < ApplicationRecord
   end
 
   def save_organisation
+    if new_organisation_name.present?
+      organisation = Organisation.new(organisation_name: new_organisation_name)
+  
+      if organisation.save
+        owner_role = Role.find_by(name: "Owner")
+        UserRole.create(user: self, organisation: organisation, role: owner_role)
+        return true
+      else
+        organisation.errors.full_messages.each do |message|
+          errors.add(:base, message)
+        end
+        return false
+      end
+    end
+    true # If no organisation creation is needed, return true
+  end
+
+  private
+
+  def validate_organisation
+    # Check if the organisation name is blank
     if new_organisation_name.blank?
       errors.add(:base, "Organisation name can't be blank.")
-      return false
+      throw(:abort)  # Prevent user from being saved
     end
-  
+    # Check if the organisation name already exists
     if Organisation.exists?(organisation_name: new_organisation_name)
       errors.add(:base, "Organisation name already exists. Please choose a different name.")
-      return false
-    end
-  
-    organisation = Organisation.new(organisation_name: new_organisation_name)
-  
-    if organisation.save
-      owner_role = Role.find_by(name: "Owner")
-      UserRole.create(user: self, organisation: organisation, role: owner_role)
-      return true
-    else
-      organisation.errors.full_messages.each do |message|
-        errors.add(:base, message)
-      end
-      return false
+      throw(:abort)  # Prevent user from being saved
     end
   end
-  
-  
-  
     
 end

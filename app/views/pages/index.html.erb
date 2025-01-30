@@ -62,6 +62,8 @@
                                 </a>
                             </div>
                         </li>
+                        <%= render 'index' %>
+
                         <% else %>
                         <li class="nav-item">
                             <a class="nav-link" href="<%= new_user_session_path %>">
@@ -149,3 +151,26 @@
 </body>
 
 </html>
+<% if user_signed_in? %>
+<h1>Welcome Home, <%= current_user.email %></h1>
+<%= link_to 'Edit Profile', profile_path, class: 'btn btn-primary' %>
+<%= link_to 'Change Password', change_user_password_path %>
+<% if @organisations.present? %>
+	 <%= form_with url: change_organisation_path, method: :post, local: true do |form| %>
+    <div>
+      <%= form.label :organisation_id, "Select Organisation" %>
+      <%= form.collection_select :organisation_id, @organisations, :id, :organisation_name, 
+            { include_blank: true, selected: @selected_organisation_id }, 
+            { class: "form-control" } %>
+    </div>
+    <div>
+      <%= form.submit "Change Organisation", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+<% end %>
+ 
+<%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+<% else %>
+<h1>Home</h1>
+<%= link_to 'Sign in', new_user_session_path %>
+<% end %>

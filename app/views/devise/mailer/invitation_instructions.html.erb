@@ -1,0 +1,7 @@
+<h1>Hello <%= @resource.name %>,</h1>
+
+<p>You have been invited to join our platform. Please click the link below to complete your registration:</p>
+
+<%= link_to 'Accept Invitation', accept_invitation_url(@resource.invitation_token, only_path: true) if @resource.present? %>
+
+<p>If you did not request this invitation, please ignore this email.</p>

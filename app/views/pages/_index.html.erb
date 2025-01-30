@@ -1,0 +1,13 @@
+<% if @organisations.present? %>
+	 <%= form_with url: change_organisation_path, method: :post, local: true do |form| %>
+    <div>
+      <%= form.label :organisation_id, "Select Organisation" %>
+      <%= form.collection_select :organisation_id, @organisations, :id, :organisation_name, 
+            { include_blank: true, selected: @selected_organisation_id }, 
+            { class: "form-control" } %>
+    </div>
+    <div>
+      <%= form.submit "Change Organisation", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+<% end %>

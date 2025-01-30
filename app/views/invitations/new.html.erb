@@ -1,0 +1,40 @@
+<%= form_with url: send_invitation_path, local: true do |form| %>
+    <h1>Send an Invitation</h1>
+    
+    <div class="form-group">
+      <%= form.label :email, "Email" %>
+      <%= form.email_field :email, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <%= form.label :name, "Name" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <%= form.label :password, "Password" %>
+      <%= form.password_field :password, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <%= form.label :role, "Role" %>
+      
+      <%= form.radio_button :role, "fullmember", class: "form-check-input" %>
+      <%= form.label :role_fullmember, "Full Member", class: "form-check-label" %>
+
+      <%= form.radio_button :role, "limitedfullmember", class: "form-check-input" %>
+      <%= form.label :role_limitedfullmember, "Limited Full Member", class: "form-check-label" %>
+
+      <%= form.radio_button :role, "admin", class: "form-check-input" %>
+      <%= form.label :role_admin, "Admin", class: "form-check-label" %>
+
+      <%= form.radio_button :role, "readonly", class: "form-check-input" %>
+      <%= form.label :role_readonly, "Read-Only", class: "form-check-label" %>
+
+    </div>
+    
+    <div class="form-group">
+      <%= form.submit "Send Invitation", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+  
