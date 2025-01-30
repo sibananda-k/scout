@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   # Edit profile (name, email, timezone)
   def edit
     @user = current_user
+    @current_organisation = current_user.organisations.find_by(id: session[:current_organisation_id])
+    @current_role = current_user.role_for_organisation(@current_organisation) if @current_organisation
   end
 
   def update
