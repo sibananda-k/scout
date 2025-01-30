@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to profile_path, notice: 'Profile updated successfully.'
+      redirect_to root_path, notice: 'Profile updated successfully.'
     else
       render :edit
     end
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 		else
 			render :change_password
 		end
-	end
+  end
 
   private
 
