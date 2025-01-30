@@ -1,40 +1,93 @@
-<h2>Sign up</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
+    <title>SB Admin 2 - Register</title>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+</head>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+<body class="bg-gradient-primary">
+    <% if resource.errors.any? %>
+    <div id="toast" class="toast show">
+        <ul>
+            <% resource.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+        </ul>
+    </div>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :timezone, "Timezone" %>
-    <%= f.select :timezone, ActiveSupport::TimeZone.all.collect { |zone| ["UTC #{zone.formatted_offset} #{zone.name}", "UTC #{zone.formatted_offset} #{zone.name}"] }, include_blank: true %>
-  </div>
-  
+    <div class="container">
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                    </div>
 
-<%= render "devise/shared/links" %>
+                                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                                    <div class="form-group">
+                                        <%= f.text_field :name, class: 'form-control form-control-user', placeholder: 'First Name' %>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <%= f.email_field :email, class: 'form-control form-control-user', placeholder: 'Email Address', autofocus: true %>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6">
+                                            <%= f.password_field :password, class: 'form-control form-control-user', placeholder: 'Password', autocomplete: "new-password" %>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <%= f.password_field :password_confirmation, class: 'form-control form-control-user', placeholder: 'Repeat Password', autocomplete: "new-password" %>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <%= f.select :timezone,
+                                        ActiveSupport::TimeZone.all.collect { |zone| ["UTC #{zone.formatted_offset} #{zone.name}", "UTC #{zone.formatted_offset} #{zone.name}"] },
+                                        { include_blank: 'Timezone' },
+                                        class: 'form-control form-control-user', autofocus: true %>
+                                    </div>
+
+                                    <div class="actions">
+                                        <%= f.submit "Register Account", class: 'btn btn-primary btn-user btn-block' %>
+                                    </div>
+                                    <% end %>
+
+                                    <%= render "devise/shared/links" %>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</body>
+
+</html>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let toast = document.getElementById("toast");
+        if (toast) {
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3000);
+        }
+    });
+</script>

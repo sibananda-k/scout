@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     root_path  # This will redirect to the profile page after login
   end
+
+  def after_sign_out_path_for(resource)
+    new_user_session_path # Redirect to login screen
+  end
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :timezone])
