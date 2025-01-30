@@ -30,7 +30,6 @@ class User < ApplicationRecord
       errors.add(:base, "Organisation name already exists. Please choose a different name.")
       return false
     end
-    byebug
   
     organisation = Organisation.new(organisation_name: new_organisation_name)
   

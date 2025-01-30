@@ -1,36 +1,73 @@
-<h1>Edit Profile</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<%= form_for @user, url: profile_path, method: :patch do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Edit Profile</title>
+
+    <!-- Custom fonts for this template -->
+    <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i', media: 'all' %>
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Edit Profile</h1>
+                                    </div>
+
+                                    <%= form_for @user, url: profile_path, method: :patch, html: { class: 'user' } do |f| %>
+                                    <div class="form-group">
+                                        <%= f.text_field :name, class: "form-control form-control-user" %>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <%= f.text_field :email, class: "form-control form-control-user" %>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <%= f.select :timezone,
+                                        ActiveSupport::TimeZone.all.collect { |zone| ["UTC #{zone.formatted_offset} #{zone.name}", "UTC #{zone.formatted_offset} #{zone.name}"] },
+                                        { include_blank: 'Timezone' },
+                                        class: 'form-control form-control-user',
+                                        style: "padding: 0px;",
+                                        autofocus: true %>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <%= f.submit 'Update Profile', class: "btn btn-primary btn-user btn-block" %>
+                                        <%= link_to 'Change Password', change_user_password_path, class: "btn btn-primary btn-user btn-block" %>
+
+                                    </div>
+                                    <% end %>
+
+                                    <div class="text-center">
+                                        <%= link_to 'Back to Home', root_path, class: 'small' %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :timezone, "Timezone" %>
-  <%= f.select :timezone, ActiveSupport::TimeZone.all.collect { |zone| ["UTC #{zone.formatted_offset} #{zone.name}", "UTC #{zone.formatted_offset} #{zone.name}"] }, include_blank: true %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit 'Update Profile' %>
-  </div>
-<% end %>
+</body>
 
 <%= link_to 'Back to Home', root_path %>
 <% if @current_role.name == 'Owner'%>
