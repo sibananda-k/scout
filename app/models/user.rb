@@ -3,22 +3,27 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable, :invitable
-
   # has_secure_password
-  attr_accessor :want_to_create_organisation, :new_organisation_name
-
+  attr_accessor  :new_organisation_name
+  attr_accessor :is_signup 
   has_many :user_roles
   has_many :organisations, through: :user_roles
   has_many :roles, through: :user_roles
   belongs_to :invited_by, class_name: "User", optional: true
-  before_save :validate_organisation
+  before_save :validate_organisation,unless: :invited?
+  validates :name, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
+  validates :password, presence: true
 
-  validates :name, presence: true
   validates :timezone, presence: true
 
   def role_for_organisation(organisation)
     user_role = user_roles.find_by(organisation: organisation)
     user_role&.role
+  end
+
+  def invited?
+    invitation_sent_at.present?
   end
 
   def save_organisation
@@ -42,15 +47,16 @@ class User < ApplicationRecord
   private
 
   def validate_organisation
-    # Check if the organisation name is blank
-    if new_organisation_name.blank?
-      errors.add(:base, "Organisation name can't be blank.")
-      throw(:abort)  # Prevent user from being saved
-    end
-    # Check if the organisation name already exists
-    if Organisation.exists?(organisation_name: new_organisation_name)
-      errors.add(:base, "Organisation name already exists. Please choose a different name.")
-      throw(:abort)  # Prevent user from being saved
+    if self.new_record?  # Check if it's a newly created user (signup)
+      if new_organisation_name.blank?
+        errors.add(:base, "Organisation name can't be blank.")
+        throw(:abort)  # Prevent user from being saved
+      end
+      # Check if the organisation name already exists
+      if Organisation.exists?(organisation_name: new_organisation_name)
+        errors.add(:base, "Organisation name already exists. Please choose a different name.")
+        throw(:abort)  # Prevent user from being saved
+      end
     end
   end
     

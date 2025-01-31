@@ -9,6 +9,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
               default_role = user.role_for_organisation(user.organisations.last)
               session[:current_organisation_id] = user.organisations.last.id
               session[:current_role] = default_role.name # or whatever role attribute you want
+              sign_in(user) unless user_signed_in?
+              redirect_to root_path # Replace with the appropriate path
+              return
             else
               # If the organisation creation failed, show errors and don't proceed
               render :new

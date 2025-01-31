@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :name, :timezone])
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :timezone])
+    devise_parameter_sanitizer.permit(:invite, keys: [:email, :name, :timezone, :password, :password_confirmation]) # Add this line for invitations
+
   end  
   
 end

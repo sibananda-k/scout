@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       render :edit
     end
   end
-
+  
   # Change password page
   def change_password
     @user = current_user

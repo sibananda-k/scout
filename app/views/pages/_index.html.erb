@@ -1,13 +1,15 @@
 <% if @organisations.present? %>
-	 <%= form_with url: change_organisation_path, method: :post, local: true do |form| %>
-    <div>
-      <%= form.label :organisation_id, "Select Organisation" %>
-      <%= form.collection_select :organisation_id, @organisations, :id, :organisation_name, 
-            { include_blank: true, selected: @selected_organisation_id }, 
-            { class: "form-control" } %>
-    </div>
-    <div>
-      <%= form.submit "Change Organisation", class: "btn btn-primary" %>
+  <%= form_with url: change_organisation_path, method: :post, local: true do |form| %>
+    <div style="display: flex">
+        <div class="form-group">
+            <%= form.select :organisation_id,
+                options_for_select([["Select Organisation", "", { disabled: true, selected: true }]] + @organisations.map { |org| [org.organisation_name, org.id] }, @selected_organisation_id),
+                {},
+                class: "form-control form-control-user mt-5 " %>
+        </div>
+        <div class="text-center" style="margin-left: 5px;">
+            <%= form.submit "Change Organisation", class: "btn btn-primary btn-user btn-block mt-5 btnn-primary" %>
+        </div>
     </div>
   <% end %>
 <% end %>

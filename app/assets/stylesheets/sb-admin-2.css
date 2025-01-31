@@ -688,6 +688,10 @@ textarea.form-control {
   border-radius: 0.35rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+.toast.show {
+  opacity: 1;
+  transform: translateX(0);
+}
 
 .btn:hover {
   color: #858796;
@@ -1278,7 +1282,16 @@ input[type="button"].btn-block {
 .tab-content > .active {
   display: block;
 }
-
+.col-sm-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+.btnn-primary{
+  height: 38px;
+  border-radius: 1.3rem;
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
 .navbar {
   position: relative;
   display: flex;
@@ -2456,7 +2469,7 @@ a:focus {
 }
 
 .topbar.navbar-light .navbar-nav .nav-item .nav-link {
-  color: #d1d3e2;
+  color: #1730ee;
 }
 
 .topbar.navbar-light .navbar-nav .nav-item .nav-link:hover {
