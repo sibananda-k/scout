@@ -31,7 +31,8 @@ class User < ApplicationRecord
       organisation = Organisation.new(organisation_name: new_organisation_name)
   
       if organisation.save
-        owner_role = Role.find_by(name: "Owner")
+        # owner_role = Role.find_by(name: "Owner")
+        owner_role = Role.by_name('Owner')
         UserRole.create(user: self, organisation: organisation, role: owner_role)
         return true
       else

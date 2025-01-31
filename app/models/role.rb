@@ -4,4 +4,7 @@ class Role < ApplicationRecord
   has_many :users, through: :user_roles
   has_many :organisations, through: :user_roles
   validates :name, presence: true, uniqueness: true
+
+  scope :by_name, ->(name) { find_by(name: name) }
+
 end
