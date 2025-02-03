@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-
   def after_sign_in_path_for(resource)
     root_path  # This will redirect to the profile page after login
   end
@@ -10,7 +9,10 @@ class ApplicationController < ActionController::Base
   end
   protected
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :timezone])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :name, :timezone])
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :timezone])
-  end
+    devise_parameter_sanitizer.permit(:invite, keys: [:email, :name, :timezone, :password, :password_confirmation]) # Add this line for invitations
+
+  end  
+  
 end

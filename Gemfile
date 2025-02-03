@@ -56,3 +56,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise', '~> 4.9.2'
+gem 'devise_invitable'
+gem 'select2-rails'
+gem 'dotenv-rails', groups: [:development, :test]

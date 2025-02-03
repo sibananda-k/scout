@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   # Edit profile (name, email, timezone)
   def edit
     @user = current_user
+    @current_organisation = current_user.organisations.find_by(id: session[:current_organisation_id])
+    @current_role = current_user.role_for_organisation(@current_organisation) if @current_organisation
   end
 
   def update
@@ -14,7 +16,7 @@ class UsersController < ApplicationController
       render :edit
     end
   end
-
+  
   # Change password page
   def change_password
     @user = current_user

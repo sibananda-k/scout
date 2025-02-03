@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>Scout App - Dashboard</title>
-
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
 </head>
-
 <body id="page-top">
     <div id="wrapper">
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -45,86 +40,30 @@
                             </div>
                         </div>
                     </form>
-
-                    <ul class="navbar-nav ml-auto ">
+                    <ul class="navbar-nav ml-auto">
                         <% if user_signed_in? %>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 0px!important">
-                                <h5><a href=" /profile" class=" small mr-2 d-none d-lg-inline "><%= current_user.name %></a></h5>
-
+                                <%= render "index" %>
                             </a>
-                            <div class=" dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="<%= profile_path %>">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
-                                </a>
-                                <a class="dropdown-item" href="<%= "#" %>">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings
-                                </a>
-                            </div>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 0px!important
+                            ">
+                                <h5><a href=" /profile" class=" small mr-2 d-none d-lg-inline "><%= current_user.name %></a></h5>
+                            </a>
+                        </li>
+                        <%= button_to destroy_user_session_path, method: :delete, class: 'btn btn-link w-100 text-left', style: "margin-top: -3px", data: { confirm: "Are you sure you want to log out?" } do %>
+                        <i class="fas fa-sign-out-alt fa-fw mr-2"></i> Logout
+                        <% end %>
                         <% else %>
-                        <li class="nav-item">
+                        <li class=" nav-item">
                             <a class="nav-link" href="<%= new_user_session_path %>">
                                 <i class="fas fa-sign-in-alt"></i> Sign In
                             </a>
                         </li>
                         <% end %>
                     </ul>
-
-                    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="profileModalLabel">User Options</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <a href="<%= profile_path %>" class="text-dark">
-                                                <i class="fas fa-user mr-2"></i> Profile
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal fade" id="userOptionsModal" tabindex="-1" aria-labelledby="userOptionsModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="userOptionsModalLabel">User Options</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <a href="<%= profile_path %>" class="btn btn-link w-100 text-left">
-                                                <i class="fas fa-user fa-fw mr-2"></i> Profile
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <%= link_to destroy_user_session_path, method: :delete, class: 'btn btn-link w-100 text-left' do %>
-                                            <i class="fas fa-sign-out-alt fa-fw mr-2"></i> Logout
-                                            <% end %>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <%= button_to destroy_user_session_path, method: :delete, class: 'btn btn-link w-100 text-left', data: { confirm: "Are you sure you want to log out?" } do %>
-                    <i class="fas fa-sign-out-alt fa-fw mr-2"></i> Logout
-                    <% end %>
                 </nav>
                 <div class="container-fluid">
                     <% if user_signed_in? %>
@@ -147,5 +86,10 @@
         <i class="fas fa-angle-up"></i>
     </a>
 </body>
-
 </html>
+
+
+
+
+
+

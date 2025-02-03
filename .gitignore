@@ -55,4 +55,4 @@ yarn-debug.log*
 !/test/fixtures/files/.keep
 !/app/controllers/concerns/.keep
 !/vendor/.keep
-!/storage/.keep
+!/storage/.keep.env

@@ -93,6 +93,13 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_invitable (2.0.9)
+      actionmailer (>= 5.0)
+      devise (>= 4.6)
+    dotenv (3.1.7)
+    dotenv-rails (3.1.7)
+      dotenv (= 3.1.7)
+      railties (>= 6.1)
     erubi (1.13.0)
     ffi (1.17.0-x86_64-linux-gnu)
     globalid (1.2.1)
@@ -191,6 +198,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    select2-rails (4.0.13)
     selenium-webdriver (4.10.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -246,12 +254,15 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise (~> 4.9.2)
+  devise_invitable
+  dotenv-rails
   jbuilder (~> 2.7)
   listen (~> 3.3)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 7.0.0)
   sass-rails (>= 6)
+  select2-rails
   selenium-webdriver
   spring
   sqlite3 (~> 1.4)
